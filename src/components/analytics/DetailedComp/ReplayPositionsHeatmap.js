@@ -176,12 +176,12 @@ export default function ReplayPositionsHeatmap() {
           />
         </div>
       ) : (
-        <div className="mt-3" style={{ height: "38px" }} />
+        <div className="" style={{ height: "38px" }} />
       )}
       <div
-        className="mt-3 border"
+        className="border-2"
         style={{
-          height: "400px",
+          height: "500px",
           filter:
             isLoading || !isEqual(appliedConfig, config)
               ? "grayscale(60%)"
