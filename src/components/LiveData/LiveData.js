@@ -67,24 +67,28 @@ function LiveData(props) {
             <div className="h-[50px] min-h-[50px] mb-5 sm:mb-0 relative z-10 max-w-[100%] sm:max-h-[50px]"><LiveCards /></div>
             <div className="h-[90%]">
                 {mapType === "2D" ?
-                    <Heatmap fetchLiveData={fetchLiveData} liveData={liveData} setLiveData={setLiveData} />
+                    <Heatmap mapRef={mapRef} mapType={mapType} handleDropDown={handleDropDown} handleMapChange={handleMapChange} fetchLiveData={fetchLiveData} liveData={liveData} setLiveData={setLiveData} />
                     : (
                         <>
                             {/* <div className="h-full flex justify-center items-center">
                                 <p className="font-bold text-2xl">Coming Soon</p>
                             </div> */}
-                            <ThreeD fetchLiveData={fetchLiveData} liveData={liveData} setLiveData={setLiveData}/>
+                            <ThreeD mapRef={mapRef} mapType={mapType} handleDropDown={handleDropDown} handleMapChange={handleMapChange} fetchLiveData={fetchLiveData} liveData={liveData} setLiveData={setLiveData}/>
                         </>
                     )}
 
-                <div onClick={handleDropDown} className="absolute bottom-2 lg:bottom-12 right-4 lg:right-7 z-10">
+                {/* <div onClick={handleDropDown} className="absolute bottom-2 lg:bottom-12 right-4 lg:right-7 z-10">
 
                     <div className="relative inline-block text-left">
                         <div>
                             <button type="button" className="bg-[#EBEBEB]/50 flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-200" id="options-menu">
-                                <p className="font-bold">
-                                    {mapType}
-                                </p>
+                                    {mapType === "2D" ? (<p>
+                                        <b className="font-extrabold">2D </b>
+                                        / 3D
+                                        </p>) : (<p>
+                                        2D /
+                                        <b className="font-extrabold"> 3D</b>
+                                        </p>)}
                             </button>
                         </div>
                         <div ref={mapRef} style={{ display: 'none' }} className="origin-top-right bottom-11 absolute right-0 mt-2 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
@@ -107,7 +111,7 @@ function LiveData(props) {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
 
             </div>
         </div>
