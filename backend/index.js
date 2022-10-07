@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-const address = '134.169.114.202' || '192.168.56.1';
+const address = '134.169.114.202' || '192.168.1.42';
 const cors = require('cors')
 require("dotenv").config();
 // for mqtt 

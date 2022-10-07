@@ -24,7 +24,7 @@ collection_filtered_human = database['FilteredDataHuman']
 collection_filtered_vehicle = database['FilteredDataVehicle']
 
 # mqtt config
-mqtt_broker = os.environ.get("MQTT_HOST") or "localhost"
+mqtt_broker = os.environ.get("MQTT_HOST") or "192.168.1.10"
 mqtt_port = 1883
 
 

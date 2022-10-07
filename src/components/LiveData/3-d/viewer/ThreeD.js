@@ -10,7 +10,7 @@ import { TbFlipHorizontal } from 'react-icons/tb';
 import { FlyControls } from 'three/examples/jsm/controls/FlyControls';
 import { BiRotateRight, BiRotateLeft, BiMinus } from 'react-icons/bi';
 import { BsPlusLg, BsSkype } from 'react-icons/bs';
-import model from './OHLF_V1.gltf';
+import model from './OHLF_V4.glb';
 import forklift from '../data/models/forklift.glb';
 import human from '../data/models/human_v3.glb';
 import path_image from '../data/images/layout_16_02.jpg';

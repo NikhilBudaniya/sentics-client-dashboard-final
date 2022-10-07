@@ -205,7 +205,7 @@ objloader.load(
 // load map
 objloader.load(
 	// resource URL
-	'../data/models/OHLF_V1.gltf',
+	'../data/models/OHLF_V4.glb',
 	function ( gltf ) {
         var element = gltf.scene;
         element.name = "OHLF_map";
