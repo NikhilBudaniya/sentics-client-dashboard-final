@@ -122,7 +122,7 @@ app.post('/api/live', (req, res) => {
         //         });
         //     }
 
-        //     return res.json({ data })
+            return res.json({ data })
     }
     res.status(400).json({ error: "invalid request parameters" });
 })
