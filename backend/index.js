@@ -42,7 +42,7 @@ client.on('connect', function () {
 })
 
 client.on('message', function (topic, payload, packet) {
-    if(topic !== 'position' || !payload)
+    if (topic !== 'position' || !payload)
         return;
     // payload is buffer
     if (payload['human']) {
@@ -87,42 +87,42 @@ app.post('/api/live', (req, res) => {
 
         // for testing purpose
 
-    //     if (resource === "human") {
-    //         return res.json({
-    //             data: [
-    //                 {
-    //                     type: 'human',
-    //                     value: '{"0":{"x": 0, "y": 0, "heading": 0.0},"2":{"x": 21.848, "y": 25.879, "heading": 0.184}}'
-    //                 },
-    //             ]
-    //         });
-    //     }
-    //     else if (resource === "vehicle") {
-    //         return res.json({
-    //             data: [
-    //                 {
-    //                     type: 'vehicle',
-    //                     value: '{"0":{"x": 15.131, "y": 50.075, "heading": -0.443}}'
-    //                 },
-    //             ]
-    //         });
-    //     }
-    //     else {
-    //         return res.json({
-    //             data: [
-    //                 {
-    //                     type: 'human',
-    //                     value: '{"0":{"x": 0, "y": 0, "heading": 0.0},"2":{"x": 21.848, "y": 25.879, "heading": 0.184}}'
-    //                 },
-    //                 {
-    //                     type: 'vehicle',
-    //                     value: '{"0":{"x": 15.131, "y": 50.075, "heading": -0.443}}'
-    //                 },
-    //             ]
-    //         });
-    //     }
+        //     if (resource === "human") {
+        //         return res.json({
+        //             data: [
+        //                 {
+        //                     type: 'human',
+        //                     value: '{"0":{"x": 0, "y": 0, "heading": 0.0},"2":{"x": 21.848, "y": 25.879, "heading": 0.184}}'
+        //                 },
+        //             ]
+        //         });
+        //     }
+        //     else if (resource === "vehicle") {
+        //         return res.json({
+        //             data: [
+        //                 {
+        //                     type: 'vehicle',
+        //                     value: '{"0":{"x": 15.131, "y": 50.075, "heading": -0.443}}'
+        //                 },
+        //             ]
+        //         });
+        //     }
+        //     else {
+        //         return res.json({
+        //             data: [
+        //                 {
+        //                     type: 'human',
+        //                     value: '{"0":{"x": 0, "y": 0, "heading": 0.0},"2":{"x": 21.848, "y": 25.879, "heading": 0.184}}'
+        //                 },
+        //                 {
+        //                     type: 'vehicle',
+        //                     value: '{"0":{"x": 15.131, "y": 50.075, "heading": -0.443}}'
+        //                 },
+        //             ]
+        //         });
+        //     }
 
-    //     return res.json({ data })
+        //     return res.json({ data })
     }
     res.status(400).json({ error: "invalid request parameters" });
 })
@@ -143,10 +143,10 @@ app.post("/selected_area", async (req, res) => {
         });
 });
 
-app.listen(port,'10.42.0.1', () => {
+// app.listen(port,'10.42.0.1', () => {
+//     console.log(`Nodejs backend listening on Port: ${port}`);
+// }).on("error", (err) => {
+app.listen(port, () => {
     console.log(`Nodejs backend listening on Port: ${port}`);
-}).on("error", (err) => {
-    app.listen(port, () => {
-        console.log(`Nodejs backend listening on Port: ${port}`);
-    })
 })
+// })
