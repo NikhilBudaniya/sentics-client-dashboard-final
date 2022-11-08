@@ -31,7 +31,7 @@ function addHeatMap(ctn) {
 let iw, ih;
 
 function Heatmap(props) {
-    let { fetchLiveData } = props;
+    let { fetchLiveData,mapRef, mapType, handleDropDown, handleMapChange } = props;
     let heatmapResource = useSelector((store) => store.heatmapResource.value);
     const heatmapData = useRef({
         history: [],
@@ -119,6 +119,7 @@ function Heatmap(props) {
             data: currentData
         });
     }
+    
 
     const btn1 = () => {
         // tempHandle([{
@@ -191,9 +192,45 @@ function Heatmap(props) {
                                     </button>
                                     <button onClick={() => {
                                         mount.current.style.scale = !mount.current.style.scale ? "-1 1" : "";
-                                    }} type="button" className="text-[#10449A] m-1 w-14 py-2 px-4 flex justify-center hover:bg-slate-300 focus:ring-slate-400 focus:ring-offset-slate-200  transition ease-in duration-200 text-center font-semibold heatmapButton focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl">
+                                    }} type="button" className="text-[#10449A] m-1 w-14 py-2 px-4 flex justify-center hover:bg-slate-300 focus:ring-slate-400 focus:ring-offset-slate-200 transition ease-in duration-200 text-center font-semibold heatmapButton focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl">
                                         <TbFlipHorizontal size="20px" />
                                     </button>
+                                    <div onClick={handleDropDown} className="z-10 m-1">
+
+                                        <div className="relative inline-block text-left">
+                                            <div>
+                                                <button type="button" className="heatmapButton hover:bg-slate-300 focus:ring-slate-400 focus:ring-offset-slate-200  transition ease-in duration-200 flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-[#10449A] dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl" id="options-menu">
+                                                    {mapType === "2D" ? (<p>
+                                                        <b className="font-extrabold">2D </b>
+                                                        / 3D
+                                                    </p>) : (<p>
+                                                        2D /
+                                                        <b className="font-extrabold"> 3D</b>
+                                                    </p>)}
+                                                </button>
+                                            </div>
+                                            <div ref={mapRef} style={{ display: 'none' }} className="origin-top-right bottom-11 absolute right-0 mt-2 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                                                <div className="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                                    <p className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                        <span onClick={() => handleMapChange("2D")} className="cursor-pointer flex flex-col">
+                                                            <span className="text-sm">
+                                                                2D
+                                                            </span>
+                                                        </span>
+                                                    </p>
+                                                    <p className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                        <span onClick={() => handleMapChange("3D")} className="cursor-pointer flex flex-col">
+                                                            <span className="text-sm">
+                                                                3D
+                                                            </span>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </React.Fragment>
                         )
