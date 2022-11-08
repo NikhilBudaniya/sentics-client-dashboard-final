@@ -42,6 +42,7 @@ client.on('connect', function () {
 })
 
 client.on('message', function (topic, payload, packet) {
+    console.log('mqtt payload: ', payload);
     if (topic !== 'position' || !payload)
         return;
     // payload is buffer
