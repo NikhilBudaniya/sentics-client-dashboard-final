@@ -44,13 +44,15 @@ client.on('connect', function () {
 client.on('message', function (topic, payload, packet) {
     // console.log('mqtt payload: ', payload.toString());
     // payload is buffer
-    if (payload['human']) {
-        mqtt_buffer_human = payload['human']
+    let temp = payload.toString();
+    let json = JSON.parse(temp);
+    if (json['human']) {
+        mqtt_buffer_human = json['human']
     }
-    if (payload['vehicle']) {
-        mqtt_buffer_vehicle = payload['vehicle']
+    if (json['vehicle']) {
+        mqtt_buffer_vehicle = json['vehicle']
     }
-    console.log(payload['human'], '++++', payload['vehicle']);
+    console.log(temp, '++++', json);
     console.log(mqtt_buffer_human, '----', mqtt_buffer_vehicle);
 })
 
