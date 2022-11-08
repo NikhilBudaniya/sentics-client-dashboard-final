@@ -47,10 +47,10 @@ client.on('message', function (topic, payload, packet) {
         return;
     // payload is buffer
     if (payload['human']) {
-        mqtt_buffer_human = payload.toString()
+        mqtt_buffer_human = payload['human']
     }
     if (payload['vehicle']) {
-        mqtt_buffer_vehicle = payload.toString()
+        mqtt_buffer_vehicle = payload['vehicle']
     }
 })
 
