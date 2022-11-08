@@ -19,7 +19,6 @@ function Dashboard(props) {
     // useSelector() is used to access any state from the store
     const auth = useSelector((store) => store.auth.value);
     const windowWidthRedux = useSelector((store) => store.WindowWidth.value);
-    console.log(windowWidthRedux);
 
     // const Tabwidth =`${window.innerWidth - 50}px`;
     // const Deskwidth = `${window.innerWidth - 250}px`;
