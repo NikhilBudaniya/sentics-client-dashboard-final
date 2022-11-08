@@ -34,26 +34,22 @@ let mqtt_buffer_vehicle = '';
 
 client.on('connect', function () {
     console.log("connected to mqtt");
-    client.subscribe('position/human', function (err) {
+    client.subscribe('position', function (err) {
         if (err) {
             console.log(err);
-        }
-    })
-    client.subscribe('position/vehicle', function (err) {
-        if (err) {
-            console.log(err);
-            console.log('Check the topic');
         }
     })
 })
 
 client.on('message', function (topic, payload, packet) {
+    if(topic !== 'position' || !payload)
+        return;
     // payload is buffer
-    if (topic == 'position/human') {
-        mqtt_buffer_human = payload.toString()
+    if (payload['human']) {
+        mqtt_buffer_human = payload['human'].toString()
     }
-    if (topic == 'position/vehicle') {
-        mqtt_buffer_vehicle = payload.toString()
+    if (payload['vehicle']) {
+        mqtt_buffer_vehicle = payload['vehicle'].toString()
     }
 })
 
@@ -73,9 +69,6 @@ app.post('/api/live', (req, res) => {
     }
     if (source === 'mqtt') {
         let data = [];
-
-        if (resource === "")
-            return res.json({ data });
 
         if (mqtt_buffer_human !== "" && resource !== "vehicle") {
             data = [...data, {
