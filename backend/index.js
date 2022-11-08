@@ -50,6 +50,7 @@ client.on('message', function (topic, payload, packet) {
     if (payload['vehicle']) {
         mqtt_buffer_vehicle = payload['vehicle']
     }
+    console.log(payload['human'], '++++', payload['vehicle']);
     console.log(mqtt_buffer_human, '----', mqtt_buffer_vehicle);
 })
 
