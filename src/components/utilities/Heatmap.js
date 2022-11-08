@@ -31,7 +31,7 @@ function addHeatMap(ctn) {
 let iw, ih;
 
 function Heatmap(props) {
-    let { fetchLiveData,mapRef, mapType, handleDropDown, handleMapChange } = props;
+    let { fetchLiveData, mapRef, mapType, handleDropDown, handleMapChange } = props;
     let heatmapResource = useSelector((store) => store.heatmapResource.value);
     const heatmapData = useRef({
         history: [],
@@ -90,6 +90,7 @@ function Heatmap(props) {
     }, 500);
 
     const tempHandle = (liveData, history) => {
+        console.log("liveData: ", liveData);
         // heatmap isn't rendering only a single value, so adding 1 dummy value isn't that bad
         let currentData = [{
             x: 0,
@@ -99,7 +100,9 @@ function Heatmap(props) {
         }];
 
         if (liveData[0]) {
+
             let val = JSON.parse(liveData[0].value);
+            console.log("val: ", val);
             for (let item in val) {
                 let d = { x: (val[item].y / (process.env.REACT_APP_BUILD_WIDTH || 82) * iw), y: ((val[item].x + 1.42) / (process.env.REACT_APP_BUILD_HEIGHT || 26) * ih), value: 100, radius: 90 };
                 currentData.push(d);
@@ -119,7 +122,7 @@ function Heatmap(props) {
             data: currentData
         });
     }
-    
+
 
     const btn1 = () => {
         // tempHandle([{
