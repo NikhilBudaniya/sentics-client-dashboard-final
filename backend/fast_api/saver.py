@@ -43,20 +43,27 @@ async def add_filtered_vehicle(filtered: FilteredNew):
 q_filtered = Queue()
 
 last_timestamp_human = datetime.now().replace(tzinfo=None)
-def mqtt_recv_human(client, userdata, msg):
+last_timestamp_vehicle = datetime.now().replace(tzinfo=None)
+def mqtt_recv(client, userdata, msg):
     global q_filtered
-    global last_timestamp_human
+    global last_timestamp_human, last_timestamp_vehicle
     timestamp = datetime.now().replace(tzinfo=None)
-    # throttle to 4 FPS, discard all other events
-    if (timestamp - last_timestamp_human).total_seconds() < 0.25:
-        return
-    last_timestamp_human = timestamp
     topic = msg.topic
     value = json.loads(msg.payload.decode('utf-8'))
-    q_filtered.put([timestamp, topic, value])
+    for o in value:
+        if o == "human":
+            # throttle to 4 FPS, discard all other events
+            if (timestamp - last_timestamp_human).total_seconds() < 0.25:
+                return
+            last_timestamp_human = timestamp
+            q_filtered.put([timestamp, o, value[o]])
+        if o== "vehicle":
+            # throttle to 4 FPS, discard all other events
+            if (timestamp - last_timestamp_vehicle).total_seconds() < 0.25:
+                return
+            last_timestamp_vehicle = timestamp
+            q_filtered.put([timestamp, o, value[o]])
 
-
-last_timestamp_vehicle = datetime.now().replace(tzinfo=None)
 def mqtt_recv_vehicle(client, userdata, msg):
     global q_filtered
     global last_timestamp_vehicle
@@ -71,9 +78,7 @@ def mqtt_recv_vehicle(client, userdata, msg):
 
 
 # create mqtt listener
-MqttListener(mqtt_broker, mqtt_port, "position/human", mqtt_recv_human)
-MqttListener(mqtt_broker, mqtt_port, "position/vehicle", mqtt_recv_vehicle)
-
+MqttListener(mqtt_broker, mqtt_port, "position", mqtt_recv)
 # parse data to mongodb format
 def parse_data(element):
     instances = {}
@@ -104,7 +109,9 @@ running = True
 while running:
     while not q_filtered.empty():
         element = q_filtered.get()
+        print(element)
         topic, filtered = parse_data(element)
+        print("filtered : ", filtered)
         if "human" in topic:
             loop.run_until_complete(add_filtered_human(filtered))
         elif "vehicle" in topic:
